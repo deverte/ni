@@ -1,0 +1,13 @@
+/**
+ * \file ni/ni.h
+ * Numetical interpolation header-only library.
+ * 
+ * \copyright GPL
+ * \author Artem Shepelin (4.shepelin@gmail.com)
+ */
+#pragma once
+
+
+#include "./common_logarithmic_interpolant.h"
+#include "./linear_interpolant.h"
+#include "./nearest_neighbor_interpolant.h"
