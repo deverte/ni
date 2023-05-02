@@ -46,20 +46,6 @@ interpolant.data_points(data);
 auto y = interpolant(x);
 ```
 
-### Common Logarithmic Interpolation
-
-```cpp
-#include <ni/ni.h>
-
-std::vector<double> data;
-// Fill data...
-
-auto interpolant = ni::CommonLogarithmicInterpolant();
-interpolant.data_points(data);
-
-auto y = interpolant(x);
-```
-
 ## License
 
 [GPL-3](./LICENSE)

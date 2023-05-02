@@ -8,6 +8,5 @@
 #pragma once
 
 
-#include "./common_logarithmic_interpolant.h"
 #include "./linear_interpolant.h"
 #include "./nearest_neighbor_interpolant.h"

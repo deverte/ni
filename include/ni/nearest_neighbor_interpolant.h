@@ -7,7 +7,6 @@
  */
 #pragma once
 
-#include <algorithm>
 #include <cmath>
 
 #include "./interpolant.h"
@@ -22,23 +21,21 @@ namespace ni {
  * If \f$F(x)\f$ is interpolant, \f$\{x_i, y_i\}\f$ - data points,
  * \f$\{x, y\}\f$ - new data point, then:
  * 
- * \f$F(x) = y = y_i\f$ if \f$|x - x_i| < |x - x_{i+1}|\f$,
+ * \f$F(x) = y = y_i\f$ if \f$|x - x_i| < |x - x_{i + 1}|\f$,
  * \f$F(x) = y = y_{i+1}\f$ otherwise.
  */
 class NearestNeighborInterpolant : public Interpolant {
  public:
-  double operator()(const double& x) const override;
+  double operator()(double x) const override;
 };
 
 
-inline double NearestNeighborInterpolant::operator()(const double& x) const {
-  return std::min_element(
-    data_points_.begin(),
-    data_points_.end(),
-    [&](auto first, auto smallest) {
-      return std::abs(first.first - x) < std::abs(smallest.first - x);
-    }
-  )->second;
+inline double NearestNeighborInterpolant::operator()(double x) const {
+  auto i = nearest_index_(x);
+
+  auto y = y_[i];
+
+  return y;
 }
 
 

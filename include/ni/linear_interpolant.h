@@ -7,10 +7,6 @@
  */
 #pragma once
 
-#include <algorithm>
-#include <cmath>
-#include <iterator>
-
 #include "./interpolant.h"
 
 
@@ -29,44 +25,23 @@ namespace ni {
  */
 class LinearInterpolant : public Interpolant {
  public:
-  double operator()(const double& x) const override;
+  double operator()(double x) const override;
 };
 
 
-inline double LinearInterpolant::operator()(const double& x) const {
-  auto nearest_index = std::distance(
-    data_points_.begin(),
-    std::min_element(
-      data_points_.begin(),
-      data_points_.end(),
-      [=](auto& first, auto& smallest) {
-        return std::abs(first.first - x) < std::abs(smallest.first - x);
-      }
-    )
-  );
-
-  auto left_index = (
-    data_points_[nearest_index].first <= x ? nearest_index : nearest_index - 1
-  );
-  if (x <= data_points_[0].first) {
-    left_index = 0;
+inline double LinearInterpolant::operator()(double x) const {
+  if (x < x_[0] || x_.end()[-1] < x) {
+    return 0.0;
   }
-  else if (x >= data_points_.end()[-2].first) {
-    left_index = data_points_.size() - 2;
-  }
-  auto right_index = left_index + 1;
 
-  double slope = (
-    1.0
-    * (data_points_[left_index].second - data_points_[right_index].second)
-    / (data_points_[left_index].first - data_points_[right_index].first)
-  );
+  auto i = left_index_(x);
 
-  return (
-    0.0
-    + data_points_[left_index].second
-    + slope * (x - data_points_[left_index].first)
-  );
+  auto y =
+    + (y_[i] * (x_[i + 1] - x) + y_[i + 1] * (x - x_[i]))
+    / (x_[i + 1] - x_[i])
+  ;
+
+  return y;
 }
 
 

@@ -4,7 +4,7 @@ from conan.tools.files import copy
 
 class Ni(ConanFile):
     name = "ni"
-    version = "0.1.2"
+    version = "0.1.1" # Makefile
     exports_sources = "include/*"
     no_copy_source = True
 
