@@ -9,7 +9,7 @@ class Ni(ConanFile):
     no_copy_source = True
 
     def requirements(self):
-        self.requires("zlib/1.2.13") # Workaround for conaninfo.txt generation
+        self.requires("nlohmann_json/3.11.2") # Workaround for conaninfo.txt generation
 
     def package(self):
         copy(self, "*.h", self.source_folder, self.package_folder)
