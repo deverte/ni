@@ -77,7 +77,7 @@ inline void Interpolant::data_points(
 ) {
   if (xs.size() != ys.size()) {
     throw std::length_error(
-      "vayu::math::Interpolant::data_points error: "
+      "ni::Interpolant::data_points error: "
       "Interpolation data points must have same size."
     );
   }
